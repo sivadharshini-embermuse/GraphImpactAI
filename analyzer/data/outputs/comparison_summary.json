@@ -1,0 +1,25 @@
+{
+    "summary": {
+        "addedFilesCount": 0,
+        "deletedFilesCount": 0,
+        "modifiedFilesCount": 1,
+        "unchangedFilesCount": 0
+    },
+    "changes": {
+        "addedFiles": [],
+        "deletedFiles": [],
+        "modifiedFiles": [
+            "New Text Document.txt"
+        ],
+        "unchangedFiles": [],
+        "fileChanges": {
+            "New Text Document.txt": {
+                "isSourceFile": false,
+                "linesAdded": 0,
+                "linesDeleted": 0,
+                "linesChanged": 0,
+                "changes": []
+            }
+        }
+    }
+}
