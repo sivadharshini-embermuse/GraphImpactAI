@@ -1,18 +1,18 @@
 from tree_sitter_language_pack import get_parser
 
 
-def parse_java(source_code: str) -> dict:
+def parse_typescript(source_code: str) -> dict:
     """
-    Parse Java source code using Tree-sitter.
+    Parse TypeScript source code using Tree-sitter.
 
     Extracts:
-    - Methods
+    - Functions
     - Classes
     - Imports
     - Syntax errors
     """
 
-    parser = get_parser("java")
+    parser = get_parser("typescript")
 
     source_bytes = source_code.encode("utf-8")
     tree = parser.parse(source_bytes)
@@ -24,10 +24,6 @@ def parse_java(source_code: str) -> dict:
     errors = []
 
     def get_node_name(node):
-        """
-        Get the name of a class or method.
-        """
-
         name_node = node.child_by_field_name("name")
 
         if name_node:
@@ -39,37 +35,29 @@ def parse_java(source_code: str) -> dict:
 
         node_type = node.type
 
-        # Java methods
-        if node_type == "method_declaration":
+        if node_type in {
+            "function_declaration",
+            "function_expression",
+            "arrow_function",
+            "method_definition"
+        }:
             functions.append({
                 "name": get_node_name(node),
                 "startLine": node.start_point[0] + 1,
                 "endLine": node.end_point[0] + 1
             })
 
-        # Java constructors
-        elif node_type == "constructor_declaration":
-            functions.append({
-                "name": get_node_name(node),
-                "startLine": node.start_point[0] + 1,
-                "endLine": node.end_point[0] + 1
-            })
-
-        # Java classes
         elif node_type in {
             "class_declaration",
-            "interface_declaration",
-            "enum_declaration"
+            "abstract_class_declaration"
         }:
             classes.append({
                 "name": get_node_name(node),
-                "type": node_type,
                 "startLine": node.start_point[0] + 1,
                 "endLine": node.end_point[0] + 1
             })
 
-        # Java imports
-        elif node_type == "import_declaration":
+        elif node_type == "import_statement":
             imports.append({
                 "type": node_type,
                 "text": node.text.decode("utf-8"),
@@ -77,7 +65,6 @@ def parse_java(source_code: str) -> dict:
                 "endLine": node.end_point[0] + 1
             })
 
-        # Syntax errors
         if node.is_error or node.is_missing:
             errors.append({
                 "type": node_type,
@@ -91,17 +78,9 @@ def parse_java(source_code: str) -> dict:
     walk(root_node)
 
     return {
-        "language": "java",
+        "language": "typescript",
         "functions": functions,
         "classes": classes,
         "imports": imports,
         "errors": errors
     }
-
-
-
-"""
-Java AST Parser
-
-Tree-sitter parser for Java source code AST node extraction.
-"""
