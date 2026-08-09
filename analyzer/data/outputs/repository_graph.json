@@ -1,0 +1,40 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "type": "file",
+            "language": "javascript",
+            "id": "src\\App.jsx"
+        },
+        {
+            "type": "function",
+            "name": "App",
+            "file": "src\\App.jsx",
+            "startLine": null,
+            "endLine": null,
+            "id": "src\\App.jsx::function::App"
+        },
+        {
+            "type": "function",
+            "name": "anonymous",
+            "file": "src\\App.jsx",
+            "startLine": null,
+            "endLine": null,
+            "id": "src\\App.jsx::function::anonymous"
+        }
+    ],
+    "edges": [
+        {
+            "type": "CONTAINS",
+            "source": "src\\App.jsx",
+            "target": "src\\App.jsx::function::App"
+        },
+        {
+            "type": "CONTAINS",
+            "source": "src\\App.jsx",
+            "target": "src\\App.jsx::function::anonymous"
+        }
+    ]
+}

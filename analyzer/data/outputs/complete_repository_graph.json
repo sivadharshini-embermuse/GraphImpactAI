@@ -1,0 +1,50 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "type": "file",
+            "language": "javascript",
+            "id": "sample - Copy/vite.config.js"
+        },
+        {
+            "type": "file",
+            "language": "javascript",
+            "id": "sample - Copy/src/App.jsx"
+        },
+        {
+            "type": "function",
+            "name": "anonymous",
+            "file": "sample - Copy/src/App.jsx",
+            "startLine": 97,
+            "endLine": 97,
+            "id": "sample - Copy/src/App.jsx::function::anonymous"
+        },
+        {
+            "type": "function",
+            "name": "App",
+            "file": "sample - Copy/src/App.jsx",
+            "startLine": 13,
+            "endLine": 105,
+            "id": "sample - Copy/src/App.jsx::function::App"
+        },
+        {
+            "type": "file",
+            "language": "javascript",
+            "id": "sample - Copy/src/main.jsx"
+        }
+    ],
+    "edges": [
+        {
+            "type": "CONTAINS",
+            "source": "sample - Copy/src/App.jsx",
+            "target": "sample - Copy/src/App.jsx::function::anonymous"
+        },
+        {
+            "type": "CONTAINS",
+            "source": "sample - Copy/src/App.jsx",
+            "target": "sample - Copy/src/App.jsx::function::App"
+        }
+    ]
+}
