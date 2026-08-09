@@ -2,23 +2,215 @@
     "summary": {
         "addedFilesCount": 0,
         "deletedFilesCount": 0,
-        "modifiedFilesCount": 1,
-        "unchangedFilesCount": 0
+        "modifiedFilesCount": 2,
+        "unchangedFilesCount": 4
     },
     "changes": {
         "addedFiles": [],
         "deletedFiles": [],
         "modifiedFiles": [
-            "New Text Document.txt"
+            "src\\App.jsx",
+            "src\\styles.css"
         ],
-        "unchangedFiles": [],
+        "unchangedFiles": [
+            "index.html",
+            "package.json",
+            "src\\main.jsx",
+            "vite.config.js"
+        ],
         "fileChanges": {
-            "New Text Document.txt": {
-                "isSourceFile": false,
-                "linesAdded": 0,
+            "src\\styles.css": {
+                "isSourceFile": true,
+                "linesAdded": 8,
                 "linesDeleted": 0,
                 "linesChanged": 0,
-                "changes": []
+                "changes": [
+                    {
+                        "type": "added",
+                        "originalStartLine": null,
+                        "originalEndLine": null,
+                        "modifiedStartLine": 55,
+                        "modifiedEndLine": 62,
+                        "addedLines": [
+                            "button.delete {",
+                            "  background: #f59e0b;",
+                            "}",
+                            "",
+                            "button.delete:hover {",
+                            "  background: #d97706;",
+                            "}",
+                            ""
+                        ],
+                        "deletedLines": []
+                    }
+                ]
+            },
+            "src\\App.jsx": {
+                "isSourceFile": true,
+                "linesAdded": 57,
+                "linesDeleted": 18,
+                "linesChanged": 13,
+                "changes": [
+                    {
+                        "type": "added",
+                        "originalStartLine": null,
+                        "originalEndLine": null,
+                        "modifiedStartLine": 10,
+                        "modifiedEndLine": 12,
+                        "addedLines": [
+                            "const isOperator = (value) => ['+', '-', '*', '/'].includes(value);",
+                            "const endsWithOperator = (value) => /[+\\-*/]$/.test(value);",
+                            ""
+                        ],
+                        "deletedLines": []
+                    },
+                    {
+                        "type": "added",
+                        "originalStartLine": null,
+                        "originalEndLine": null,
+                        "modifiedStartLine": 17,
+                        "modifiedEndLine": 37,
+                        "addedLines": [
+                            "  const evaluateExpression = (expression) => {",
+                            "    try {",
+                            "      const result = eval(expression);",
+                            "      return String(result);",
+                            "    } catch {",
+                            "      return 'Error';",
+                            "    }",
+                            "  };",
+                            "",
+                            "  const deleteLast = () => {",
+                            "    setDisplay((current) => {",
+                            "      if (current === 'Error' || current.length === 1) {",
+                            "        setOverwrite(true);",
+                            "        return '0';",
+                            "      }",
+                            "      const next = current.slice(0, -1);",
+                            "      return next === '' ? '0' : next;",
+                            "    });",
+                            "    setOverwrite(false);",
+                            "  };",
+                            ""
+                        ],
+                        "deletedLines": []
+                    },
+                    {
+                        "type": "added",
+                        "originalStartLine": null,
+                        "originalEndLine": null,
+                        "modifiedStartLine": 39,
+                        "modifiedEndLine": 43,
+                        "addedLines": [
+                            "    if (value === 'DEL') {",
+                            "      deleteLast();",
+                            "      return;",
+                            "    }",
+                            ""
+                        ],
+                        "deletedLines": []
+                    },
+                    {
+                        "type": "modified",
+                        "originalStartLine": 16,
+                        "originalEndLine": 21,
+                        "modifiedStartLine": 45,
+                        "modifiedEndLine": 45,
+                        "addedLines": [
+                            "      setDisplay((current) => evaluateExpression(current));"
+                        ],
+                        "deletedLines": [
+                            "      try {",
+                            "        const result = eval(display.replace(/\u00d7/g, '*').replace(/\u00f7/g, '/'));",
+                            "        setDisplay(String(result));",
+                            "      } catch {",
+                            "        setDisplay('Error');",
+                            "      }"
+                        ]
+                    },
+                    {
+                        "type": "modified",
+                        "originalStartLine": 26,
+                        "originalEndLine": 33,
+                        "modifiedStartLine": 50,
+                        "modifiedEndLine": 60,
+                        "addedLines": [
+                            "    if (isOperator(value)) {",
+                            "      setDisplay((current) => {",
+                            "        if (current === 'Error') {",
+                            "          return '0' + value;",
+                            "        }",
+                            "        if (endsWithOperator(current)) {",
+                            "          return current.slice(0, -1) + value;",
+                            "        }",
+                            "        return current + value;",
+                            "      });",
+                            "      setOverwrite(false);"
+                        ],
+                        "deletedLines": [
+                            "    if (overwrite) {",
+                            "      if (value === '+' || value === '-' || value === '*' || value === '/') {",
+                            "        setDisplay(display + value);",
+                            "        setOverwrite(false);",
+                            "      } else {",
+                            "        setDisplay(value === '.' ? '0.' : value);",
+                            "        setOverwrite(value === '.');",
+                            "      }"
+                        ]
+                    },
+                    {
+                        "type": "modified",
+                        "originalStartLine": 37,
+                        "originalEndLine": 39,
+                        "modifiedStartLine": 64,
+                        "modifiedEndLine": 72,
+                        "addedLines": [
+                            "    setDisplay((current) => {",
+                            "      if (current === 'Error' || overwrite || current === '0') {",
+                            "        if (value === '.') {",
+                            "          setOverwrite(true);",
+                            "          return '0.';",
+                            "        }",
+                            "        setOverwrite(false);",
+                            "        return value;",
+                            "      }"
+                        ],
+                        "deletedLines": [
+                            "    if (value === '.' && display.includes('.')) {",
+                            "      return;",
+                            "    }"
+                        ]
+                    },
+                    {
+                        "type": "modified",
+                        "originalStartLine": 41,
+                        "originalEndLine": 41,
+                        "modifiedStartLine": 74,
+                        "modifiedEndLine": 79,
+                        "addedLines": [
+                            "      if (value === '.' && current.includes('.')) {",
+                            "        return current;",
+                            "      }",
+                            "",
+                            "      return current + value;",
+                            "    });"
+                        ],
+                        "deletedLines": [
+                            "    setDisplay((current) => (current === '0' ? value : current + value));"
+                        ]
+                    },
+                    {
+                        "type": "added",
+                        "originalStartLine": null,
+                        "originalEndLine": null,
+                        "modifiedStartLine": 91,
+                        "modifiedEndLine": 91,
+                        "addedLines": [
+                            "        <button className=\"span-two delete\" onClick={deleteLast}>DEL</button>"
+                        ],
+                        "deletedLines": []
+                    }
+                ]
             }
         }
     }

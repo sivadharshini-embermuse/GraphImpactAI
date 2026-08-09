@@ -1,0 +1,52 @@
+{
+    "modifiedFilesCount": 2,
+    "analyzedFilesCount": 2,
+    "results": {
+        "src\\App.jsx": {
+            "supported": true,
+            "language": "javascript",
+            "functions": {
+                "added": [],
+                "deleted": [],
+                "modified": [
+                    {
+                        "name": "App",
+                        "originalStartLine": 10,
+                        "originalEndLine": 66,
+                        "modifiedStartLine": 13,
+                        "modifiedEndLine": 105
+                    },
+                    {
+                        "name": "anonymous",
+                        "originalStartLine": 14,
+                        "originalEndLine": 42,
+                        "modifiedStartLine": 10,
+                        "modifiedEndLine": 10
+                    }
+                ],
+                "unchanged": []
+            },
+            "classes": {
+                "added": [],
+                "deleted": [],
+                "modified": [],
+                "unchanged": []
+            },
+            "imports": {
+                "added": [],
+                "deleted": [],
+                "unchanged": [
+                    "import { useState } from 'react';"
+                ]
+            },
+            "syntaxErrors": {
+                "original": [],
+                "modified": []
+            }
+        },
+        "src\\styles.css": {
+            "supported": false,
+            "message": "Unsupported programming language."
+        }
+    }
+}
