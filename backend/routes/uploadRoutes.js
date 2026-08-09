@@ -8,8 +8,14 @@ const router = express.Router();
 router.post(
     "/upload",
     uploadMiddleware.fields([
-        { name: "originalRepository", maxCount: 1 },
-        { name: "modifiedRepository", maxCount: 1 }
+        {
+            name: "originalRepository",
+            maxCount: 1
+        },
+        {
+            name: "modifiedRepository",
+            maxCount: 1
+        }
     ]),
     uploadController.uploadRepositories
 );

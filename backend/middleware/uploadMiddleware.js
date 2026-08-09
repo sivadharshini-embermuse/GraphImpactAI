@@ -6,49 +6,103 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// GraphImpactAI/uploads
-const uploadsRoot = path.resolve(__dirname, "../../uploads");
+const uploadRoot = path.join(
+    __dirname,
+    "..",
+    "uploads"
+);
 
-const originalDirectory = path.join(uploadsRoot, "original");
-const modifiedDirectory = path.join(uploadsRoot, "modified");
+const originalDir = path.join(
+    uploadRoot,
+    "original"
+);
 
-// Create directories if they don't exist
-fs.mkdirSync(originalDirectory, { recursive: true });
-fs.mkdirSync(modifiedDirectory, { recursive: true });
+const modifiedDir = path.join(
+    uploadRoot,
+    "modified"
+);
+
+fs.mkdirSync(originalDir, {
+    recursive: true
+});
+
+fs.mkdirSync(modifiedDir, {
+    recursive: true
+});
+
 
 const storage = multer.diskStorage({
+
     destination: (req, file, cb) => {
-        if (file.fieldname === "originalRepository") {
-            cb(null, originalDirectory);
-        } else if (file.fieldname === "modifiedRepository") {
-            cb(null, modifiedDirectory);
+
+        if (
+            file.fieldname ===
+            "originalRepository"
+        ) {
+            cb(null, originalDir);
+
+        } else if (
+            file.fieldname ===
+            "modifiedRepository"
+        ) {
+            cb(null, modifiedDir);
+
         } else {
-            cb(new Error("Invalid repository field."));
+            cb(
+                new Error(
+                    "Invalid upload field"
+                )
+            );
         }
     },
 
     filename: (req, file, cb) => {
-        const uniqueName = `${Date.now()}-${file.originalname}`;
-        cb(null, uniqueName);
+
+        const timestamp = Date.now();
+
+        const extension = path.extname(
+            file.originalname
+        );
+
+        const filename =
+            `${timestamp}-${file.fieldname}${extension}`;
+
+        cb(null, filename);
     }
 });
 
-const fileFilter = (req, file, cb) => {
-    const extension = path.extname(file.originalname).toLowerCase();
+
+const fileFilter = (
+    req,
+    file,
+    cb
+) => {
+
+    const extension = path
+        .extname(file.originalname)
+        .toLowerCase();
 
     if (extension !== ".zip") {
-        return cb(new Error("Only ZIP files are allowed."));
+        return cb(
+            new Error(
+                "Only ZIP files are allowed"
+            )
+        );
     }
 
     cb(null, true);
 };
 
-const upload = multer({
+
+const uploadMiddleware = multer({
     storage,
     fileFilter,
+
     limits: {
-        fileSize: 100 * 1024 * 1024
+        fileSize:
+            100 * 1024 * 1024
     }
 });
 
-export default upload;
+
+export default uploadMiddleware;
